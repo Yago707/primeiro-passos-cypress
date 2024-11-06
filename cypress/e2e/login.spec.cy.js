@@ -1,29 +1,27 @@
 describe("Orange HRM Test", () => {
+ 
+ const selectorsList = {
+  usernameFilde: "[name='username']",
+  passwordFilde: "[name='password']",
+  loginButton: "[type='submit']",
+  SelectionTitleTopBar:".oxd-topbar-header-breadcrumb-module",
+ wrongCredencialAlert: "[role='alert']"
+ }
+ 
   it("login - Success", () => {
-    cy.visit(
-      "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"
-    );
-    cy.get(
-      ":nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-input"
-    ).type("Admin"); // verificando Admin
-    cy.get(
-      ":nth-child(3) > .oxd-input-group > :nth-child(2) > .oxd-input"
-    ).type("admin123"); // verificando password
-    cy.get(".oxd-button").click(); // clicar botão login
+    cy.visit("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+    cy.get("[name='username']").type("Admin"); // Digita "Admin" no campo de nome de usuário
+    cy.get("[name='password']").type("admin123"); // Digita "admin123" no campo de senha
+    cy.get("[type='submit']").click(); // Clica no botão de submit
     cy.location("pathname").should("equal", "/web/index.php/dashboard/index");
-    cy.get(".oxd-topbar-header-breadcrumb > .oxd-text").contains("Dashboard");
+    cy.get(".oxd-topbar-header-breadcrumb-module").contains("Dashboard");
   });
   it("login - fail", () => {
-    cy.visit(
-      "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"
-    );
-    cy.get(
-      ":nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-input"
-    ).type("Test"); // verificando Admin
-    cy.get(
-      ":nth-child(3) > .oxd-input-group > :nth-child(2) > .oxd-input"
-    ).type("Test"); // verificando password
-    cy.get(".oxd-button").click(); // clicar botão login
-    cy.get(".oxd-alert-content");
+    cy.visit("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+    cy.get("[name='username']").type("Test"); // verificando Admin
+    cy.get("[name='password']").type("Test"); // verificando password
+    cy.get("[type='submit']").click(); // clicar botão login
+    cy.get("[role='alert']"); // Seleciona o elemento com o atributo role='alert'
   });
 });
+
