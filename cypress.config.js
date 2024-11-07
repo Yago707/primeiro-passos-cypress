@@ -8,3 +8,10 @@ module.exports = defineConfig({
     pageLoadTimeout: 120000, //120 segundos
   },
 });
+
+
+module.exports = {
+  e2e: {
+    baseUrl: "https://opensource-demo.orangehrmlive.com/web/index.php",
+  },
+};
